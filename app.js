@@ -10,6 +10,8 @@ let employee = [];
 let formData = {};
 let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
+console.log("welcome to live project");
+
 btn_Submit.addEventListener("click", function (e) {
   e.preventDefault();
 
