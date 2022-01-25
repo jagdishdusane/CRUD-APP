@@ -148,5 +148,5 @@ function userEdit(eID) {
   });
 
   displayEmploye(result);
-  Swal.fire("successfull");
+  Swal.fire("successful");
 }
