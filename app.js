@@ -8,7 +8,8 @@ const btn_Submit = document.querySelector(".btn-submit");
 
 let employee = [];
 let formData = {};
-let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+var letters = /^[A-z ]+$/;
 
 console.log("welcome to live project");
 
@@ -24,13 +25,18 @@ btn_Submit.addEventListener("click", function (e) {
     Swal.fire("All fields are required!");
     return 0;
   }
-  if (!isNaN(inputName.value)) {
+  if (!inputName.value.match(letters)) {
     Swal.fire("Invalid Name!");
     return 0;
   }
 
   if (!inputEmail.value.match(mailformat)) {
     Swal.fire("Invalid  email address!");
+    return 0;
+  }
+
+  if (!inputCity.value.match(letters)) {
+    Swal.fire("Invalid City!");
     return 0;
   }
 
@@ -55,9 +61,9 @@ const displayEmploye = function (empData) {
 
     <h2 class="workout__title">${element.emp_Name}</h2>
                            <div class="workout__details">
-                                <span class="workout__icon">${element.emp_Email}</span>   
+                                <span style="width:15rem" class="workout__icon">${element.emp_Email}</span>   
                                 <span class="workout__value">Rs.${element.emp_Salay}</span>
-                                <span class="workout__value">${element.emp_City}</span>
+                                <span style="width:6rem" class="workout__value">${element.emp_City}</span>
                                 <button class="trash-btn" onclick=(trashBTN(${element.id}))><i class="far fa-trash-alt"></i></button>
                                 <button class="edit-btn"><i class="far far fa-edit"></i></button>
                            </div>
@@ -109,6 +115,30 @@ function userEdit(eID) {
     emp_Salay: +salary,
     emp_City: city,
   };
+
+  if (
+    !data.emp_Name.trim() ||
+    !data.emp_Email ||
+    !data.emp_Salay ||
+    !data.emp_City
+  ) {
+    Swal.fire("All fields are required!");
+    return 0;
+  }
+  if (!data.emp_Name.match(letters)) {
+    Swal.fire("Invalid Name!");
+    return 0;
+  }
+
+  if (!data.emp_Email.match(mailformat)) {
+    Swal.fire("Invalid  email address!");
+    return 0;
+  }
+
+  if (!data.emp_City.match(letters)) {
+    Swal.fire("Invalid City!");
+    return 0;
+  }
 
   let result = employee.map((item) => {
     if (item.id === eID) {
